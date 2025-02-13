@@ -5,7 +5,7 @@
     <classes>
       <class name="testcases.InventoryPageTest">
         <methods>
-          <include name="verifyInventoryPageDropDownList2_Test"/>
+          <include name="verifyInventoryPageText"/>
           <include name="setUp"/>
           <include name="closeBrowser"/>
         </methods>

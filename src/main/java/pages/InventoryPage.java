@@ -26,6 +26,26 @@ public class InventoryPage extends TestBase {
 	private WebElement facebookLogo;
 	@FindBy(xpath = "//a[@data-test='social-linkedin']")
 	private WebElement linkedInLogo;
+	@FindBy(xpath = "//div[@class='footer_copy']")
+	private WebElement InventoryPageFooterText;
+	@FindBy(xpath = "//button[@id='add-to-cart-sauce-labs-backpack']")
+	private WebElement backPack;
+	@FindBy(xpath = "//button[@id='add-to-cart-sauce-labs-bike-light']")
+	private WebElement bikeLight;
+	@FindBy(xpath = "//button[@id='add-to-cart-sauce-labs-bolt-t-shirt']")
+	private WebElement tshirt;
+	@FindBy(xpath = "//button[@id='add-to-cart-sauce-labs-fleece-jacket']")
+	private WebElement jacket;
+	@FindBy(xpath = "//button[@id='add-to-cart-sauce-labs-onesie']")
+	private WebElement onesie;
+	@FindBy(xpath = "//button[@id='add-to-cart-test.allthethings()-t-shirt-(red)']")
+	private WebElement tShirtRed;
+	@FindBy(xpath = "//span[@class='shopping_cart_badge']")
+	private WebElement cartCount;
+	@FindBy(xpath="//button[@id='remove-sauce-labs-backpack']")
+	private WebElement removeBackPack;
+	@FindBy(xpath="//button[@id='remove-sauce-labs-bike-light']")
+	private WebElement removeBikeLight;
 
 	// constructor
 	public InventoryPage() {
@@ -82,6 +102,35 @@ public class InventoryPage extends TestBase {
 
 	public boolean verifyInventoryPageLinkedInLogo() {
 		return linkedInLogo.isDisplayed();
+	}
+
+	public String VerifyInventoryPageFooterText() {
+		return InventoryPageFooterText.getText();
+	}
+
+	public String add6Carts() {
+
+		HandeledDropdown.handleDropdown(dropdownlist, "Name (A to Z)");
+		backPack.click();
+		bikeLight.click();
+		tshirt.click();
+		jacket.click();
+		onesie.click();
+		tShirtRed.click();
+		return cartCount.getText();
+
+	}
+	
+	public String remove2Products() {
+		add6Carts();
+		removeBackPack.click();
+		removeBikeLight.click();
+		return cartCount.getText();
+	}
+	
+	public String clickOnCartLogo() {
+		cartlogo.click();
+		return driver.getCurrentUrl() ;
 	}
 
 }

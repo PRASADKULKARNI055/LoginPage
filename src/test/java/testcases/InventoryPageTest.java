@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
 
+import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.devtools.v120.browser.Browser;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -14,6 +15,7 @@ import org.testng.annotations.Test;
 import base.TestBase;
 import pages.InventoryPage;
 import pages.LoginPage;
+import utility.ReadData;
 
 public class InventoryPageTest extends TestBase{
 
@@ -29,8 +31,8 @@ public class InventoryPageTest extends TestBase{
 	}
 	
 	@Test
-	public void verifyInventoryPageText() {
-		String expText="Swag Labs";
+	public void verifyInventoryPageText() throws EncryptedDocumentException, IOException {
+		String expText=ReadData.getExcelData(1,0);
 		String actText=inventorypage.verifyInventoryPageText();
 		Assert.assertEquals(expText, actText);
 		Reporter.log(actText);
@@ -108,8 +110,37 @@ public class InventoryPageTest extends TestBase{
 	Reporter.log("The LinkedIn Logo is Present"+ linkedIn);
 	}
 		
+	@Test
+	public void VerifyInventoryPageFooterTextTest() {
+		String expText="© 2025 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy";
+		String actText=inventorypage.VerifyInventoryPageFooterText();
+		Assert.assertEquals(expText, actText);
+		Reporter.log(actText);
+				
+	}
+	@Test
+	public void add6CartsTest() {
+		String expCount="6";
+		String actCount=inventorypage.add6Carts();
+		Assert.assertEquals(expCount, actCount);
+		Reporter.log("The Count of Product added in the Cart : "+actCount);
+	}
 	
-	
+	@Test
+	public void remove2ProductsTest() {
+		String expCount="4";
+		String actCount=inventorypage.remove2Products();
+		Assert.assertEquals(expCount, actCount);
+		Reporter.log("The Count of Remaining Products in Cart :"+actCount);
+	}
+		
+	@Test
+	public void clickOnCartLogoTest() {
+		String expURL="https://www.saucedemo.com/cart.html";
+		String actURL=inventorypage.clickOnCartLogo();
+		Assert.assertEquals(expURL, actURL);
+		Reporter.log("After Clicking on Cart Logo the Actual URL is : "+actURL);
+	}
 	@AfterMethod
 	public void closeBrowser() {
 		driver.close();
